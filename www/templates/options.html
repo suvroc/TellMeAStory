@@ -1,10 +1,22 @@
 <ion-view view-title="Playlists">
-  <ion-content>
-      Tu bêdzie mozliwoœæ dostosowywania trudnosci
-    <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
-      </ion-item>
-    </ion-list>
-  </ion-content>
+    <ion-content>
+        Tu bêdzie mozliwoœæ dostosowywania trudnosci
+
+
+        <div class="list">
+            <div class="item range range-positive">
+                <i class="icon ion-ios-sunny-outline"></i>
+                <input type="range" name="itemNuber" min="6" max="12" value="{items}">
+                <i class="icon ion-ios-sunny"></i>
+            </div>
+        </div>
+
+        <!--<button class="button button-primary button-block " ng-click="checkForUpdates()">
+            Check for updates
+        </button>
+        <button class="button button-stable button-block button-pulse" ng-if="hasUpdate" ng-click="doUpdate()">
+            download update
+        </button>-->
+
+    </ion-content>
 </ion-view>
