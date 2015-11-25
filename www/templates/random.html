@@ -1,0 +1,16 @@
+<ion-view view-title="Search">
+  <ion-content>
+      
+      <button class="button button-block button-positive" ng-click="randomTiles()">
+          Wylosuj
+      </button>
+      
+      <div class="row" ng-repeat="tile in tiles">
+          <div class=" col col-33" ng-repeat="item in tile">
+              <div class="card">
+                  <i class="dice fa" ng-class="item"></i>
+              </div>
+          </div>  
+      </div>
+  </ion-content>
+</ion-view>
