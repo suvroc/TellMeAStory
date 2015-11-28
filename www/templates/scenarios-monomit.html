@@ -1,0 +1,23 @@
+﻿<ion-view view-title="Monomit">
+  <ion-content>
+      <button class="button button-full button-positive"
+              ng-click="generate()">
+          Wylosuj
+      </button>
+      <div class="list">
+          <ul>
+              <li ng-repeat="stage in stages"
+                  class="item item-checkbox"
+                  on-hold="showHint('{{stage.hint}}')">
+                  <label class="checkbox">
+                      <input type="checkbox" ng-model="stage.done">
+                  </label>
+                  {{stage.name}}
+                  <i class="fa" ng-class="stage.iconClass"
+                     style="font-size:1.75em;float:right;margin-bottom:-10px"></i>
+              </li>
+          </ul>  
+
+      </div>
+  </ion-content>
+</ion-view>

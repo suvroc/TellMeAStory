@@ -1,22 +1,19 @@
-<ion-view view-title="Playlists">
-    <ion-content>
-        Tu bêdzie mozliwoœæ dostosowywania trudnosci
-
-
+ï»¿<ion-view title="Welcome">
+    <ion-content padding="true">
         <div class="list">
-            <div class="item range range-positive">
-                <i class="icon ion-ios-sunny-outline"></i>
-                <input type="range" name="itemNuber" min="6" max="12" value="{items}">
-                <i class="icon ion-ios-sunny"></i>
+            <div class="item item-divider">
+                Losowanie
             </div>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    IloÅ›Ä‡ symboli
+                </div>
+                <select ng-model="tilesNumber.value"
+                        ng-options="item.number as item.name for item in tilesOptions">
+
+                </select>
+            </label>
+                {{tilesNumber.value}}
         </div>
-
-        <!--<button class="button button-primary button-block " ng-click="checkForUpdates()">
-            Check for updates
-        </button>
-        <button class="button button-stable button-block button-pulse" ng-if="hasUpdate" ng-click="doUpdate()">
-            download update
-        </button>-->
-
     </ion-content>
 </ion-view>
