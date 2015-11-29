@@ -1,0 +1,117 @@
+.icon {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+}
+
+/* =======================================================================================
+Example showing how to change the color/size of the icons:
+.icon-name {
+	font-size: 32px; // works because "width" & "height" were set using em units
+	color: red; // works for single-colored icons, because "fill" was set to "currentColor"
+}
+======================================================================================== */
+
+.icon-anchor { 
+    background-image: 
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><linearGradient id='gradient'><stop offset='10%' stop-color='%23F00'/><stop offset='90%' stop-color='%23fcc'/> </linearGradient><rect fill='url(%23gradient)' x='0' y='0' width='100%' height='100%'/></svg>");
+    
+    width:0.75em;
+    color: white; text-shadow: 2px 2px rgba(0,0,0,0.4);}
+
+.icon-microscope {
+	width: 0.75em;
+}
+
+.icon-paintcan {
+	width: 0.75em;
+}
+
+.icon-telescope {
+	width: 0.9072265625em;
+}
+
+.icon-graduate {
+	width: 1.31640625em;
+}
+
+.icon-satellite {
+	width: 1.0390625em;
+}
+
+.icon-bomb {
+	width: 1.140625em;
+}
+
+.icon-bike {
+	width: 1.171875em;
+}
+
+.icon-navigation {
+	width: 1.03125em;
+}
+
+.icon-leaf {
+	width: 0.9999980080174282em;
+}
+
+.icon-fire {
+	width: 0.7857128586620092em;
+}
+
+.icon-plane {
+	width: 0.7860879210056737em;
+}
+
+.icon-key {
+	width: 0.9391738375027963em;
+}
+
+.icon-truck {
+	width: 1.0357128381729126em;
+}
+
+.icon-umbrella {
+	width: 0.9285703394562006em;
+}
+
+.icon-suitcase {
+	width: 1.000000116725687em;
+}
+
+.icon-flag-o {
+	width: 1.0357160121202469em;
+}
+
+.icon-fire-extinguisher {
+	width: 0.7845058117527515em;
+}
+
+.icon-rocket {
+	width: 0.9441959485411644em;
+}
+
+.icon-unlock-alt {
+	width: 0.6428584381937981em;
+}
+
+.icon-female {
+	width: 0.7142941057682037em;
+}
+
+.icon-male {
+	width: 0.5714317113161087em;
+}
+
+.icon-ship {
+	width: 1.142856314778328em;
+}
+
+.icon-user-secret {
+	width: 0.785717862347763em;
+}
+
+.icon-motorcycle {
+	width: 1.2885052015384417em;
+}

@@ -1,7 +1,10 @@
 /* Empty. Add your own CSS if you like */
 
-.dice.fa {
+.dice.icon {
     font-size: 5em;
     text-align: center;
     width: 100%;
+}
+.card {
+    text-align:center;
 }
