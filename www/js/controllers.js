@@ -78,29 +78,23 @@
 
     function randomTiles() {
         var tiles = [];
-        var userIndexes = [];
-        var tilesNumber = configService.tiles.value;
-        $scope.tilesNumber = tilesNumber;
-        var j = 0;
-        for (var i = 0; i < tilesNumber / 3; i++) {
-            var row = [];
-            for (var k = 0; k < 3 && j < tilesNumber; k++, j++) {
-                var rand = 0;
-                do {
-                    rand = symbolService.getRandomInt(0, symbolService.availableIconClasses.length - 1);
-                } while (userIndexes.indexOf(rand) != -1);
-
-                row.push({ iconClass: symbolService.availableIconClasses[rand] });
-                userIndexes.push(rand);
-            }
-            tiles.push(row);
+        var randomIcons = symbolService.getRandomArray(configService.tiles.value);
+        
+        var i, j, temparray, chunk = 3;
+        for (i = 0, j = randomIcons.stages.length; i < j; i += chunk) {
+            temparray = randomIcons.stages.slice(i, i + chunk);
+            tiles.push(temparray);
         }
-        $scope.tiles = tiles;
+
+        $scope.tiles = {
+            stages: tiles,
+            name: randomIcons.name
+        };
     }
 
     function saveTiles(tiles)
     {
-        symbolService.saveTiles(tiles);
+        symbolService.saveTiles(tiles, 'random');
     }
 })
 .controller('ScenariosCtrl', function ($scope, $stateParams) {
@@ -113,43 +107,109 @@
     symbolService) {
     $scope.showHint = showHint;
    
-    var data = [
+    var data =
         {
-            name: 'Status quo',
-            hint: 'Status quo - podpowiedź',
-            iconClass: 'fa-gift',
-            done: false
-        },
-        {
-            name: 'Wezwanie',
-            hint: 'Wezwanie - podpowiedź',
-            iconClass: 'fa-key',
-            done: false
-        },
-    ];
-    $scope.stages = data;
+            name: '',
+            stages:
+        [
+            {
+                name: 'Status quo',
+                hint: 'Opis sytuacji ogólnej bohatera',
+                iconClass: 'fa-gift',
+                done: false
+            },
+            {
+                name: 'Wezwanie',
+                hint: 'Wezwanie do przygody, do wyjścia z codzienności',
+                iconClass: 'fa-key',
+                done: false
+            },
+            {
+                name: 'Wsparcie',
+                hint: 'Pomoc w wyruszeniu w drogę lub rozpoczeciu przygody',
+                iconClass: 'fa-key',
+                done: false
+            },
+            {
+                name: 'Start',
+                hint: 'Początek przygody',
+                iconClass: 'fa-key',
+                done: false
+            },
+            {
+                name: 'Próby',
+                hint: 'Wyzwania na drodze do celu',
+                iconClass: 'fa-key',
+                done: false
+            },
+            {
+                name: 'Kryzys',
+                hint: 'Załamanie bohatera w drodze do celu',
+                iconClass: 'fa-key',
+                done: false
+            },
+            {
+                name: 'Skarb',
+                hint: 'Poznanie nagrody czekającej u celu',
+                iconClass: 'fa-key',
+                done: false
+            },
+            {
+                name: 'Rezultat',
+                hint: 'Wynik zmagań bohatera',
+                iconClass: 'fa-key',
+                done: false
+            },
+            {
+                name: 'Powrót',
+                hint: 'Powrót do codziennego życia',
+                iconClass: 'fa-key',
+                done: false
+            },
+            {
+                name: 'Nowe życie',
+                hint: 'Zmiany w życiu po przezyciu przygody',
+                iconClass: 'fa-key',
+                done: false
+            },
+            {
+                name: 'Rozwiązanie',
+                hint: 'Znalezienie rozwiazania na poczatkowe problemy',
+                iconClass: 'fa-key',
+                done: false
+            },
+        ]
+        };
+    $scope.stagesObject = data;
+
+    generate();
 
     function generate() {
-        var randomIcons = symbolService.getRandomArray(data.length)
-        data = $scope.stages;
-        for(var i=0;i<data.length;i++)
+        var randomIcons = symbolService.getRandomArray(data.stages.length)
+        data = $scope.stagesObject;
+        for(var i=0;i<data.stages.length;i++)
         {
-            data[i].iconClass = randomIcons[i].iconClass;
+            data.stages[i].iconClass = randomIcons.stages[i].iconClass;
         }
-
-        $scope.stages = data;
+        data.name = randomIcons.name;
+        $scope.stagesObject = data;
     }
 
     $scope.generate = generate;
+    $scope.saveTiles = saveTiles;
 
     function showHint(hint)
     {
         var alertPopup = $ionicPopup.alert({
-            title: 'Don\'t eat that!',
+            title: 'Podpowiedź!',
             template: hint
         });
         alertPopup.then(function (res) {
             console.log('Thank you for not eating my delicious ice cream cone');
         });
+    }
+
+    function saveTiles(tiles) {
+        symbolService.saveTiles(tiles, 'monomit');
     }
 });

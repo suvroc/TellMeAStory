@@ -4,7 +4,7 @@
         <button class="button button-block button-positive" ng-click="randomTiles()">
             Wylosuj
         </button>
-        <div class="row" ng-repeat="tile in tiles">
+        <div class="row" ng-repeat="tile in tiles.stages">
             <div class="row">
                 <div class="col col-33" ng-repeat="item in tile">
                     <div class="card">
@@ -17,7 +17,8 @@
 
     </ion-content>
     <div class="bar bar-footer">
-        <button class="button button-stable button-block" ng-click="saveTiles(tiles)">
+        <button class="button button-stable button-block" 
+                ng-click="saveTiles(tiles)">
             Zapisz ustawienie
         </button>
     </div>

@@ -100,10 +100,13 @@
             userIndexes.push(rand);
         }
 
-        return row;
+        return {
+            stages: row,
+            name: guid()
+        };
     }
 
-    function saveTiles(tiles)
+    function saveTiles(tiles, type)
     {
         var LS_SAVED_SETS = "saved_sets";
         var object = {
@@ -112,9 +115,31 @@
         }
 
         var dataList = [];
-        //if ()
+        if (localStorageService.get(LS_SAVED_SETS))
+        {
+            dataList = localStorageService.get(LS_SAVED_SETS);
+        }
+        var list =
+            dataList.filter(function (el) { return el.name == tiles.name });
+        var element = list.length > 0 ? list[0] : null;
+        if (element)
+        {
+            element.stages = tiles.stages;
+            element.type = type;
+        } else {
+            tiles.type = type;
+            dataList.push(tiles);
+        }
 
         localStorageService.set(LS_SAVED_SETS, dataList);
+    }
+
+    function guid() {
+        function _p8(s) {
+            var p = (Math.random().toString(16) + "000000000").substr(2, 8);
+            return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
+        }
+        return _p8() + _p8(true) + _p8(true) + _p8();
     }
 
     return {
