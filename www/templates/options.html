@@ -9,7 +9,8 @@
                     Ilość symboli
                 </div>
                 <select ng-model="tilesNumber.value"
-                        ng-options="item.number as item.name for item in tilesOptions">
+                        ng-options="item.number as item.name for item in tilesOptions"
+                        ng-change="valueChanged()">
 
                 </select>
             </label>

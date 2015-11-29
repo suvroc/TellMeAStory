@@ -1,14 +1,30 @@
 ﻿angular.module('random.services', [])
 
-.factory('configService', function () {
-    var tilesNumber = 9;
+.factory('configService', function (localStorageService) {
+    var tilesNumber = {
+        value: 9
+    };
+    var LS_CONFIG_TILES_NUMBER = "tiles_number";
+
+    if (!localStorageService.get(LS_CONFIG_TILES_NUMBER))
+    {
+        localStorageService.set(LS_CONFIG_TILES_NUMBER, tilesNumber.value);
+    } else {
+        tilesNumber.value = localStorageService.get(LS_CONFIG_TILES_NUMBER);
+    }
+
+    function saveConfig()
+    {
+        localStorageService.set(LS_CONFIG_TILES_NUMBER, tilesNumber.value);
+    }
 
     return {
-        tiles: { value: tilesNumber }
+        tiles: tilesNumber,
+        saveConfig: saveConfig
     }
 })
 
-.factory('symbolService', function (configService) {
+.factory('symbolService', function (configService, localStorageService) {
     var availableIconClasses =
         ["icon-anchor", "icon-anvil", "icon-archery-target",
             "icon-axe", "icon-bear-trap", "icon-book",
@@ -87,9 +103,24 @@
         return row;
     }
 
+    function saveTiles(tiles)
+    {
+        var LS_SAVED_SETS = "saved_sets";
+        var object = {
+            date: Date().now,
+            tiles: tiles
+        }
+
+        var dataList = [];
+        //if ()
+
+        localStorageService.set(LS_SAVED_SETS, dataList);
+    }
+
     return {
         availableIconClasses: availableIconClasses,
         getRandomInt: getRandomInt,
-        getRandomArray: getRandomArray
+        getRandomArray: getRandomArray,
+        saveTiles: saveTiles
     };
 })

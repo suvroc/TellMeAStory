@@ -56,6 +56,10 @@
 
     $scope.tilesNumber = configService.tiles;
 
+    $scope.valueChanged = function () {
+        configService.saveConfig();
+    }
+
     $scope.$on('$ionicView.enter', function () {
         $ionicSideMenuDelegate.canDragContent(false);
     });
@@ -68,6 +72,7 @@
 .controller('RandomCtrl', function ($scope, $stateParams, configService,
     symbolService) {
     $scope.randomTiles = randomTiles;
+    $scope.saveTiles = saveTiles;
     
     $scope.tiles = [];
 
@@ -91,6 +96,11 @@
             tiles.push(row);
         }
         $scope.tiles = tiles;
+    }
+
+    function saveTiles(tiles)
+    {
+        symbolService.saveTiles(tiles);
     }
 })
 .controller('ScenariosCtrl', function ($scope, $stateParams) {
