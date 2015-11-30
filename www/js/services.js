@@ -104,7 +104,7 @@
 
         return {
             stages: row,
-            name: guid()
+            id: guid()
         };
     }
 
@@ -118,7 +118,7 @@
             dataList = localStorageService.get(LS_SAVED_SETS);
         }
         var list =
-            dataList.filter(function (el) { return el.name == tiles.name });
+            dataList.filter(function (el) { return el.id == tiles.id });
         var element = list.length > 0 ? list[0] : null;
         if (element)
         {
@@ -140,9 +140,9 @@
             .filter(function(el) {return el.type == type});
     }
 
-    function getSavedTile(name) {
+    function getSavedTile(id) {
         return localStorageService.get(LS_SAVED_SETS)
-            .filter(function (el) { return el.name == name });
+            .filter(function (el) { return el.id == id });
     }
 
     function guid() {

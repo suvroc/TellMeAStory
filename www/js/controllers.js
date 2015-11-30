@@ -88,13 +88,40 @@
 
         $scope.tiles = {
             stages: tiles,
-            name: randomIcons.name
+            id: randomIcons.id
         };
     }
 
     function saveTiles(tiles)
     {
-        symbolService.saveTiles(tiles, 'random');
+        var myPopup = $ionicPopup.show({
+            template: '<input type="text" ng-model="name">',
+            title: 'Podaj nazwę',
+            subTitle: 'dla zapisanego zestawu',
+            scope: $scope,
+            buttons: [
+              { text: 'Anuluj' },
+              {
+                  text: '<b>Ok</b>',
+                  type: 'button-positive',
+                  onTap: function (e) {
+                      if (!$scope.name) {
+                          //don't allow the user to close unless he enters wifi password
+                          e.preventDefault();
+                      } else {
+                          return $scope.name;
+                      }
+                  }
+              }
+            ]
+        });
+
+        myPopup.then(function (res) {
+            tiles.name = res;
+            symbolService.saveTiles(tiles, 'random');
+        });
+
+        //symbolService.saveTiles(tiles, 'random');
     }
 })
 .controller('ScenariosCtrl', function ($scope, $stateParams) {
@@ -109,7 +136,7 @@
    
     var data =
         {
-            name: '',
+            id: '',
             stages:
         [
             {
@@ -191,7 +218,7 @@
         {
             data.stages[i].iconClass = randomIcons.stages[i].iconClass;
         }
-        data.name = randomIcons.name;
+        data.id = randomIcons.id;
         $scope.stagesObject = data;
     }
 
@@ -210,7 +237,33 @@
     }
 
     function saveTiles(tiles) {
-        symbolService.saveTiles(tiles, 'monomit');
+
+        var myPopup = $ionicPopup.show({
+            template: '<input type="text" ng-model="name">',
+            title: 'Podaj nazwę',
+            subTitle: 'dla zapisanego zestawu',
+            scope: $scope,
+            buttons: [
+              { text: 'Anuluj' },
+              {
+                  text: '<b>Ok</b>',
+                  type: 'button-positive',
+                  onTap: function (e) {
+                      if (!$scope.name) {
+                          //don't allow the user to close unless he enters wifi password
+                          e.preventDefault();
+                      } else {
+                          return $scope.name;
+                      }
+                  }
+              }
+            ]
+        });
+
+        myPopup.then(function (res) {
+            tiles.name = res;
+            symbolService.saveTiles(tiles, 'monomit');
+        });
     }
 })
 .controller('LoadCtrl', function ($scope, $stateParams) {
