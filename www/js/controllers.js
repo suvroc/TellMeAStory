@@ -212,4 +212,10 @@
     function saveTiles(tiles) {
         symbolService.saveTiles(tiles, 'monomit');
     }
+})
+.controller('LoadCtrl', function ($scope, $stateParams) {
+})
+.controller('LoadScenarioCtrl', function ($scope, $stateParams, symbolService) {
+    $scope.scenarios = symbolService.getSavedTiles($stateParams.scenarioName);
+    $scope.scenarioName = $stateParams.scenarioName;
 });

@@ -25,6 +25,8 @@
 })
 
 .factory('symbolService', function (configService, localStorageService) {
+    var LS_SAVED_SETS = "saved_sets";
+
     var availableIconClasses =
         ["icon-anchor", "icon-anvil", "icon-archery-target",
             "icon-axe", "icon-bear-trap", "icon-book",
@@ -108,11 +110,7 @@
 
     function saveTiles(tiles, type)
     {
-        var LS_SAVED_SETS = "saved_sets";
-        var object = {
-            date: Date().now,
-            tiles: tiles
-        }
+        
 
         var dataList = [];
         if (localStorageService.get(LS_SAVED_SETS))
@@ -126,12 +124,25 @@
         {
             element.stages = tiles.stages;
             element.type = type;
+            element.date = new Date();
         } else {
             tiles.type = type;
+            tiles.date = new Date();
             dataList.push(tiles);
         }
 
         localStorageService.set(LS_SAVED_SETS, dataList);
+    }
+
+    function getSavedTiles(type)
+    {
+        return localStorageService.get(LS_SAVED_SETS)
+            .filter(function(el) {return el.type == type});
+    }
+
+    function getSavedTile(name) {
+        return localStorageService.get(LS_SAVED_SETS)
+            .filter(function (el) { return el.name == name });
     }
 
     function guid() {
@@ -143,9 +154,9 @@
     }
 
     return {
-        availableIconClasses: availableIconClasses,
-        getRandomInt: getRandomInt,
         getRandomArray: getRandomArray,
-        saveTiles: saveTiles
+        saveTiles: saveTiles,
+        getSavedTiles: getSavedTiles,
+        getSavedTile: getSavedTile
     };
 })

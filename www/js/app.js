@@ -79,6 +79,24 @@ angular.module('starter',
                 controller: 'MonomitCtrl'
             }
         }
+    })
+    .state('app.load', {
+        url: '/load',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/load.html',
+                controller: 'LoadCtrl'
+            }
+        }
+    })
+    .state('app.loadScen', {
+        url: '/load/:scenarioName',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/loadScenario.html',
+                controller: 'LoadScenarioCtrl'
+            }
+        }
     });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/random');
