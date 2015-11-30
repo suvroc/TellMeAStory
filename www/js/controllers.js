@@ -70,7 +70,7 @@
 })
 
 .controller('RandomCtrl', function ($scope, $stateParams, configService,
-    symbolService) {
+    symbolService, $ionicPopup) {
     $scope.randomTiles = randomTiles;
     $scope.saveTiles = saveTiles;
     
@@ -94,8 +94,9 @@
 
     function saveTiles(tiles)
     {
+        $scope.data = { name: "" }
         var myPopup = $ionicPopup.show({
-            template: '<input type="text" ng-model="name">',
+            template: '<input type="text" ng-model="data.name">',
             title: 'Podaj nazwę',
             subTitle: 'dla zapisanego zestawu',
             scope: $scope,
@@ -105,11 +106,11 @@
                   text: '<b>Ok</b>',
                   type: 'button-positive',
                   onTap: function (e) {
-                      if (!$scope.name) {
+                      if (!$scope.data.name) {
                           //don't allow the user to close unless he enters wifi password
                           e.preventDefault();
                       } else {
-                          return $scope.name;
+                          return $scope.data.name;
                       }
                   }
               }
@@ -131,7 +132,7 @@
 .controller('PlaylistCtrl', function ($scope, $stateParams) {
 })
 .controller('MonomitCtrl', function ($scope, $stateParams, $ionicPopup,
-    symbolService) {
+    symbolService, $ionicPopup) {
     $scope.showHint = showHint;
    
     var data =
@@ -237,9 +238,9 @@
     }
 
     function saveTiles(tiles) {
-
+        $scope.data = { name: "" }
         var myPopup = $ionicPopup.show({
-            template: '<input type="text" ng-model="name">',
+            template: '<input type="text" ng-model="data.name">',
             title: 'Podaj nazwę',
             subTitle: 'dla zapisanego zestawu',
             scope: $scope,
@@ -249,11 +250,11 @@
                   text: '<b>Ok</b>',
                   type: 'button-positive',
                   onTap: function (e) {
-                      if (!$scope.name) {
+                      if (!$scope.data.name) {
                           //don't allow the user to close unless he enters wifi password
                           e.preventDefault();
                       } else {
-                          return $scope.name;
+                          return $scope.data.name;
                       }
                   }
               }
