@@ -1,6 +1,6 @@
 ﻿angular.module('random.services', [])
 
-.factory('configService', function (localStorageService) {
+.factory('configService',/* @ngInject */ function (localStorageService) {
     var tilesNumber = {
         value: 9
     };
@@ -24,7 +24,7 @@
     }
 })
 
-.factory('symbolService', function (configService, localStorageService) {
+.factory('symbolService',/* @ngInject */ function (configService, localStorageService) {
     var LS_SAVED_SETS = "saved_sets";
 
     var availableIconClasses =
