@@ -17,7 +17,11 @@ var paths = {
 		"./www/lib/angular-local-storage/dist/angular-local-storage.min.js",
 		"./www/lib/ionic/fonts/*",
 		"./www/lib/ionic/css/ionic.css",
-		"./www/lib/icomoon/fonts/*"
+		"./www/lib/icomoon/fonts/*",
+		"./www/lib/angular/*.js",
+		"./www/lib/angular-animate/*.js",
+		"./www/lib/angular-sanitize/*.js",
+		"./www/lib/angular-ui-router/*.js"
 	]
 };
 
@@ -105,7 +109,7 @@ gulp.task('templates',function(){
 
 gulp.task('vendorjs', function () {
     util.log('Bundling, minifying, and copying the Vendor JavaScript');
-    return gulp.src(paths.vendorjs, { base: './' })
+    return gulp.src(paths.vendorjs, { base: './www' })
 	.pipe(plumber({
 	  errorHandler: function (error) {
 		console.log(error.message);
@@ -118,7 +122,7 @@ gulp.task('vendorjs', function () {
 
 gulp.task('vendorcss', function () {
     util.log('Bundling, minifying, and copying the Vendor JavaScript');
-    return gulp.src(paths.vendorcss, { base: './' })
+    return gulp.src(paths.vendorcss, { base: './www' })
 	.pipe(plumber({
 	  errorHandler: function (error) {
 		console.log(error.message);
@@ -130,7 +134,7 @@ gulp.task('vendorcss', function () {
 
 gulp.task('vendorfiles', function () {
     util.log('Bundling, minifying, and copying the Vendor files');
-    return gulp.src(paths.vendorfiles, { base: './' })
+    return gulp.src(paths.vendorfiles, { base: './www' })
 	.pipe(plumber({
 	  errorHandler: function (error) {
 		console.log(error.message);
@@ -141,4 +145,4 @@ gulp.task('vendorfiles', function () {
 });
 
 gulp.task('build', ['images', 'styles', 'scripts', 'html', 'templates',
-'vendorjs', 'vendorcss']);
+'vendorfiles']);
