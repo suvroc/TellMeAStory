@@ -42,8 +42,16 @@ angular.module('starter',
             }
         }
     })
-
-    .state('app.scenarion', {
+    .state('app.randomParam', {
+        url: '/random/:setId',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/random.html',
+                controller: "RandomCtrl"
+            }
+        }
+    })
+    .state('app.scenarios', {
         url: '/scenarios',
         views: {
             'menuContent': {
@@ -73,6 +81,15 @@ angular.module('starter',
     })
     .state('app.monomit', {
         url: '/scenarios/monomit',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/scenarios-monomit.html',
+                controller: 'MonomitCtrl'
+            }
+        }
+    })
+    .state('app.monomitParam', {
+        url: '/scenarios/monomit/:setId',
         views: {
             'menuContent': {
                 templateUrl: 'templates/scenarios-monomit.html',

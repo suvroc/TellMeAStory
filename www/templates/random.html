@@ -4,6 +4,11 @@
         <button class="button button-block button-positive" ng-click="randomTiles()">
             Wylosuj
         </button>
+        <ul class="list" ng-show="tiles.name">
+            <li class="item">
+                {{tiles.name}}
+            </li>
+        </ul>
         <div class="row" ng-repeat="tile in tiles.stages">
             <div class="row">
                 <div class="col col-33" ng-repeat="item in tile">

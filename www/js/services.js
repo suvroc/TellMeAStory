@@ -141,8 +141,14 @@
     }
 
     function getSavedTile(id) {
-        return localStorageService.get(LS_SAVED_SETS)
+        var list = localStorageService.get(LS_SAVED_SETS)
             .filter(function (el) { return el.id == id });
+        if (list)
+        {
+            return list[0];
+        } else {
+            return null;
+        }
     }
 
     function guid() {

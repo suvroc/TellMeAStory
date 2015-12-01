@@ -1,14 +1,14 @@
-﻿<ion-view view-title="Browse">
+﻿<ion-view view-title="Zapisane scenariusze">
     <ion-content>
         <ion-list>
             <ion-item menu-close
-                      href="#app/load/random">
+                      ng-click="loadList('random')">
                 Opowiedz historię
             </ion-item>
             <div class="item item-divider">
                 Scenariusze
             </div>
-            <ion-item href="#app/load/monomit">
+            <ion-item ng-click="loadList('monomit')">
                 Monomit
             </ion-item>
 

@@ -71,10 +71,20 @@
 
 .controller('RandomCtrl',/* @ngInject */ function ($scope, $stateParams, configService,
     symbolService, $ionicPopup) {
+
+    
+
     $scope.randomTiles = randomTiles;
     $scope.saveTiles = saveTiles;
     
     $scope.tiles = [];
+
+    if ($stateParams.setId)
+    {
+        $scope.tiles = symbolService.getSavedTile($stateParams.setId);
+    } else {
+        randomTiles();
+    }
 
     function randomTiles() {
         var tiles = [];
@@ -210,7 +220,11 @@
         };
     $scope.stagesObject = data;
 
-    generate();
+    if ($stateParams.setId) {
+        $scope.stagesObject = symbolService.getSavedTile($stateParams.setId);
+    } else {
+        generate();
+    }
 
     function generate() {
         var randomIcons = symbolService.getRandomArray(data.stages.length)
@@ -263,13 +277,21 @@
 
         myPopup.then(function (res) {
             tiles.name = res;
-        symbolService.saveTiles(tiles, 'monomit');
+            symbolService.saveTiles(tiles, 'monomit');
         });
     }
 })
-.controller('LoadCtrl',/* @ngInject */ function ($scope, $stateParams) {
+.controller('LoadCtrl',/* @ngInject */ function ($scope, $stateParams, $state) {
+    $scope.loadList = function (name) {
+        $state.go('app.loadScen', { scenarioName: name }, { reload: true });
+    };
 })
-.controller('LoadScenarioCtrl',/* @ngInject */ function ($scope, $stateParams, symbolService) {
+.controller('LoadScenarioCtrl',/* @ngInject */ function ($scope, $stateParams,
+    symbolService, $state) {
     $scope.scenarios = symbolService.getSavedTiles($stateParams.scenarioName);
     $scope.scenarioName = $stateParams.scenarioName;
+
+    $scope.loadList = function (scenarioName, id) {
+        $state.go('app.'+ scenarioName +'Param', { setId: id }, { reload: true });
+    };
 });
