@@ -1,6 +1,6 @@
 ﻿angular.module('starter.controllers',
     ['random.services'])
-
+/* @ngInject */
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -41,7 +41,7 @@
         }, 1000);
     };
 })
-
+/* @ngInject */
 .controller('OptionsCtrl', function ($scope, configService,
     $ionicSideMenuDelegate) {
 
@@ -69,7 +69,7 @@
     
 })
 
-.controller('RandomCtrl', function ($scope, $stateParams, configService,
+.controller('RandomCtrl',/* @ngInject */ function ($scope, $stateParams, configService,
     symbolService, $ionicPopup) {
     $scope.randomTiles = randomTiles;
     $scope.saveTiles = saveTiles;
@@ -119,19 +119,19 @@
 
         myPopup.then(function (res) {
             tiles.name = res;
-            symbolService.saveTiles(tiles, 'random');
+        symbolService.saveTiles(tiles, 'random');
         });
 
         //symbolService.saveTiles(tiles, 'random');
     }
 })
-.controller('ScenariosCtrl', function ($scope, $stateParams) {
+.controller('ScenariosCtrl',/* @ngInject */ function ($scope, $stateParams) {
 })
-.controller('InfoCtrl', function ($scope, $stateParams) {
+.controller('InfoCtrl',/* @ngInject */ function ($scope, $stateParams) {
 })
-.controller('PlaylistCtrl', function ($scope, $stateParams) {
+.controller('PlaylistCtrl',/* @ngInject */ function ($scope, $stateParams) {
 })
-.controller('MonomitCtrl', function ($scope, $stateParams, $ionicPopup,
+.controller('MonomitCtrl',/* @ngInject */ function ($scope, $stateParams, $ionicPopup,
     symbolService, $ionicPopup) {
     $scope.showHint = showHint;
    
@@ -263,13 +263,13 @@
 
         myPopup.then(function (res) {
             tiles.name = res;
-            symbolService.saveTiles(tiles, 'monomit');
+        symbolService.saveTiles(tiles, 'monomit');
         });
     }
 })
-.controller('LoadCtrl', function ($scope, $stateParams) {
+.controller('LoadCtrl',/* @ngInject */ function ($scope, $stateParams) {
 })
-.controller('LoadScenarioCtrl', function ($scope, $stateParams, symbolService) {
+.controller('LoadScenarioCtrl',/* @ngInject */ function ($scope, $stateParams, symbolService) {
     $scope.scenarios = symbolService.getSavedTiles($stateParams.scenarioName);
     $scope.scenarioName = $stateParams.scenarioName;
 });

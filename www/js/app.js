@@ -7,7 +7,7 @@
 angular.module('starter',
     ['ionic', 'starter.controllers', 'random.services', 'LocalStorageModule'])
 
-.run(function ($ionicPlatform) {
+.run(/* @ngInject */ function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -23,7 +23,7 @@ angular.module('starter',
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(/* @ngInject */ function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
       .state('app', {

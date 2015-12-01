@@ -1,221 +1,148 @@
-//initialize all of our variables
-var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, browserSync, autoprefixer, gulpSequence, shell, sourceMaps, plumber;
-
-var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
-
-//load all of our dependencies
-//add more here if you want to include more libraries
-gulp        = require('gulp');
-gutil       = require('gulp-util');
-concat      = require('gulp-concat');
-uglify      = require('gulp-uglify');
-sass        = require('gulp-sass');
-sourceMaps  = require('gulp-sourcemaps');
-imagemin    = require('gulp-imagemin');
-minifyCSS   = require('gulp-minify-css');
-browserSync = require('browser-sync');
-autoprefixer = require('gulp-autoprefixer');
-gulpSequence = require('gulp-sequence').use(gulp);
-shell       = require('gulp-shell');
-plumber     = require('gulp-plumber');
-
 var paths = {
-	appDirectory: "www/"
+	appDirectory: "www/",
+	vendorcss: [
+		"./www/lib/components-font-awesome/css/font-awesome.min.css",
+		"./www/lib/icomoon/style-font.css",
+		"lib/ionic/css/ionic.css"
+	],
+	vendorjs: [
+		"./www/lib/ionic/js/ionic.bundle.min.js",
+		"./www/lib/angular-local-storage/dist/angular-local-storage.min.js",
+		//"./www/cordova.js"		
+	],
+	vendorfiles: [
+	"./www/lib/components-font-awesome/css/font-awesome.min.css",
+		"./www/lib/icomoon/style-font.css",
+		"./www/lib/ionic/js/ionic.bundle.min.js",
+		"./www/lib/angular-local-storage/dist/angular-local-storage.min.js",
+		"./www/lib/ionic/fonts/*",
+		"./www/lib/ionic/css/ionic.css",
+		"./www/lib/icomoon/fonts/*",
+		"./www/lib/angular/*.js",
+		"./www/lib/angular-animate/*.js",
+		"./www/lib/angular-sanitize/*.js",
+		"./www/lib/angular-ui-router/*.js"
+	]
 };
 
-gulp.task('browserSync', function() {
-    browserSync({
-        server: {
-            baseDir: paths.appDirectory
-        },
-        options: {
-            reloadDelay: 250
-        },
-        notify: false
-    });
+var gulp = require('gulp'),
+    plumber = require('gulp-plumber'),
+    rename = require('gulp-rename');
+var autoprefixer = require('gulp-autoprefixer');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var imagemin = require('gulp-imagemin'),
+    cache = require('gulp-cache');
+var minifycss = require('gulp-minify-css');
+var browserSync = require('browser-sync');
+var util = require('gulp-util');
+var ngAnnotate = require('gulp-ng-annotate');
+
+gulp.task('browser-sync', function() {
+  browserSync({
+    server: {
+       baseDir: "./"
+    }
+  });
 });
 
-
-//compressing images & handle SVG files
-gulp.task('images', function(tmp) {
-    gulp.src(['www/img/*.jpg', 'www/img/*.png'])
-        //prevent pipe breaking caused by errors from gulp plugins
-        .pipe(plumber())
-        .pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
-        .pipe(gulp.dest('www/img'));
+gulp.task('bs-reload', function () {
+  browserSync.reload();
 });
 
-//compressing images & handle SVG files
-gulp.task('images-deploy', function() {
-    gulp.src(['www/img/**/*'])
-        //prevent pipe breaking caused by errors from gulp plugins
-        .pipe(plumber())
-        .pipe(gulp.dest('dist/img'));
+gulp.task('images', function(){
+	util.log('Images');
+  gulp.src('www/img/**/*')
+    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(gulp.dest('dist/img/'));
 });
 
-//compiling our Javascripts
-gulp.task('scripts', function() {
-    //this is where our dev JS scripts are
-    return gulp.src(['www/js/**/*.js'])
-                //prevent pipe breaking caused by errors from gulp plugins
-                .pipe(plumber())
-                //this is the filename of the compressed version of our JS
-                .pipe(concat('application.js'))
-                //catch errors
-                .on('error', gutil.log)
-                //compress :D
-                .pipe(uglify())
-                //where we will store our finalized, compressed script
-                .pipe(gulp.dest('www/js'))
-                //notify browserSync to refresh
-                .pipe(browserSync.reload({stream: true}));
+gulp.task('styles', function(){
+	util.log('Styles');
+	gulp.src('www/css/**/*')
+    .pipe(autoprefixer('last 2 versions'))
+    .pipe(gulp.dest('dist/css/'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(minifycss())
+    .pipe(gulp.dest('dist/css/'))
+    .pipe(browserSync.reload({stream:true}))
 });
 
-//compiling our Javascripts for deployment
-gulp.task('scripts-deploy', function() {
-    //this is where our dev JS scripts are
-    return gulp.src(['www/js/**/*.js'])
-                //prevent pipe breaking caused by errors from gulp plugins
-                .pipe(plumber())
-                //this is the filename of the compressed version of our JS
-                .pipe(concat('application.js'))
-                //compress :D
-                .pipe(uglify())
-                //where we will store our finalized, compressed script
-                .pipe(gulp.dest('dist/js'));
+gulp.task('scripts', function(){
+	util.log('Scripts');
+  return gulp.src('www/js/**/*.js')
+    .pipe(plumber({
+      errorHandler: function (error) {
+        console.log(error.message);
+        this.emit('end');
+    }}))
+    .pipe(concat('main.js'))
+	.pipe(ngAnnotate())
+    .pipe(gulp.dest('dist/js/'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js/'))
+    .pipe(browserSync.reload({stream:true}))
 });
 
-//compiling our SCSS files
-gulp.task('styles', function() {
-    //the initializer / master SCSS file, which will just be a file that imports everything
-    return gulp.src('www/css/init.scss')
-                //prevent pipe breaking caused by errors from gulp plugins
-                .pipe(plumber({
-                  errorHandler: function (err) {
-                    console.log(err);
-                    this.emit('end');
-                  }
-                }))
-                //get sourceMaps ready
-                .pipe(sourceMaps.init())
-                //include SCSS and list every "include" folder
-                .pipe(sass({
-                      errLogToConsole: true,
-                      includePaths: [
-                          'app/styles/scss/'
-                      ]
-                }))
-                .pipe(autoprefixer({
-                   browsers: autoPrefixBrowserList,
-                   cascade:  true
-                }))
-                //catch errors
-                .on('error', gutil.log)
-                //the final filename of our combined css file
-                .pipe(concat('styles.css'))
-                //get our sources via sourceMaps
-                .pipe(sourceMaps.write())
-                //where to save our final, compressed css file
-                .pipe(gulp.dest('app/styles'))
-                //notify browserSync to refresh
-                .pipe(browserSync.reload({stream: true}));
+gulp.task('html',function(){
+	gulp.src(['www/*.html'])
+		.pipe(plumber({
+			handleError: function (err) {
+				console.log(err);
+				this.emit('end');
+			}
+		}))
+		.pipe(gulp.dest('dist/'));
 });
 
-//compiling our SCSS files for deployment
-gulp.task('styles-deploy', function() {
-    //the initializer / master SCSS file, which will just be a file that imports everything
-    return gulp.src('app/styles/scss/init.scss')
-                .pipe(plumber())
-                //include SCSS includes folder
-                .pipe(sass({
-                      includePaths: [
-                          'app/styles/scss',
-                      ]
-                }))
-                .pipe(autoprefixer({
-                  browsers: autoPrefixBrowserList,
-                  cascade:  true
-                }))
-                //the final filename of our combined css file
-                .pipe(concat('styles.css'))
-                .pipe(minifyCSS())
-                //where to save our final, compressed css file
-                .pipe(gulp.dest('dist/styles'));
+gulp.task('templates',function(){
+	gulp.src(['www/templates/**/*.html'])
+		.pipe(plumber({
+			handleError: function (err) {
+				console.log(err);
+				this.emit('end');
+			}
+		}))
+		.pipe(gulp.dest('dist/templates'));
 });
 
-//basically just keeping an eye on all HTML files
-gulp.task('html', function() {
-    //watch any and all HTML files and refresh when something changes
-    return gulp.src('www/*.html')
-        .pipe(plumber())
-        .pipe(browserSync.reload({stream: true}))
-        //catch errors
-        .on('error', gutil.log);
+gulp.task('vendorjs', function () {
+    util.log('Bundling, minifying, and copying the Vendor JavaScript');
+    return gulp.src(paths.vendorjs, { base: './www' })
+	.pipe(plumber({
+	  errorHandler: function (error) {
+		console.log(error.message);
+		this.emit('end');
+	}}))
+	.pipe(uglify())
+	.pipe(gulp.dest('./dist'))
+	.pipe(browserSync.reload({stream:true}))
 });
 
-//migrating over all HTML files for deployment
-gulp.task('html-deploy', function() {
-    //grab everything, which should include htaccess, robots, etc
-    gulp.src('www/*')
-        //prevent pipe breaking caused by errors from gulp plugins
-        .pipe(plumber())
-        .pipe(gulp.dest('dist'));
-		
-	gulp.src('www/templates/*')
-        //prevent pipe breaking caused by errors from gulp plugins
-        .pipe(plumber())
-        .pipe(gulp.dest('dist/templates/'));
-
-    //grab any hidden files too
-    gulp.src('www/.*')
-        //prevent pipe breaking caused by errors from gulp plugins
-        .pipe(plumber())
-        .pipe(gulp.dest('dist'));
-
-    gulp.src('www/fonts/**/*')
-        //prevent pipe breaking caused by errors from gulp plugins
-        .pipe(plumber())
-        .pipe(gulp.dest('dist/fonts'));
-
-    //grab all of the styles
-    gulp.src(['www/css/*.css'])
-        //prevent pipe breaking caused by errors from gulp plugins
-        .pipe(plumber())
-        .pipe(gulp.dest('dist/css'));
+gulp.task('vendorcss', function () {
+    util.log('Bundling, minifying, and copying the Vendor JavaScript');
+    return gulp.src(paths.vendorcss, { base: './www' })
+	.pipe(plumber({
+	  errorHandler: function (error) {
+		console.log(error.message);
+		this.emit('end');
+	}}))
+	.pipe(gulp.dest('./dist'))
+	.pipe(browserSync.reload({stream:true}))
 });
 
-//cleans our dist directory in case things got deleted
-gulp.task('clean', function() {
-    return shell.task([
-      'rm -rf dist'
-    ]);
+gulp.task('vendorfiles', function () {
+    util.log('Bundling, minifying, and copying the Vendor files');
+    return gulp.src(paths.vendorfiles, { base: './www' })
+	.pipe(plumber({
+	  errorHandler: function (error) {
+		console.log(error.message);
+		this.emit('end');
+	}}))
+	.pipe(gulp.dest('./dist'))
+	.pipe(browserSync.reload({stream:true}))
 });
 
-//create folders using shell
-gulp.task('scaffold', function() {
-  return shell.task([
-      'mkdir dist',
-      'mkdir dist/fonts',
-      'mkdir dist/images',
-      'mkdir dist/scripts',
-      'mkdir dist/styles'
-    ]
-  );
-});
-
-//this is our master task when you run `gulp` in CLI / Terminal
-//this is the main watcher to use when in active development
-//  this will:
-//  startup the web server,
-//  start up browserSync
-//  compress all scripts and SCSS files
-gulp.task('default', ['browserSync', 'scripts', 'styles'], function() {
-    //a list of watchers, so it will watch all of the following files waiting for changes
-    gulp.watch('app/scripts/src/**', ['scripts']);
-    gulp.watch('app/styles/scss/**', ['styles']);
-    gulp.watch('app/images/**', ['images']);
-    gulp.watch('app/*.html', ['html']);
-});
-
-//this is our deployment task, it will set everything for deployment-ready files
-gulp.task('deploy', gulpSequence('clean', 'scaffold', ['scripts-deploy', 'styles-deploy', 'images-deploy'], 'html-deploy'));
+gulp.task('build', ['images', 'styles', 'scripts', 'html', 'templates',
+'vendorfiles']);
