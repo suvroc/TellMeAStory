@@ -1493,13 +1493,26 @@
     "resources\\icomoon_167_icons\\style.css",
     ".git\\objects\\e7\\31ad144aecaa69306d4e3639a20d352e873caa",
     ".git\\objects\\pack\\pack-81f382f0e2d09a0dbd86e0d3a970384df0e64cb0.idx",
-    ".git\\objects\\pack\\pack-81f382f0e2d09a0dbd86e0d3a970384df0e64cb0.pack"
+    ".git\\objects\\pack\\pack-81f382f0e2d09a0dbd86e0d3a970384df0e64cb0.pack",
+    ".git\\objects\\ef\\c09f039eae8c46e266623bf43813aaa74d21b7",
+    ".git\\objects\\ff\\72a95af0dd9ad38f0761a5c55eb2466938c990",
+    ".git\\objects\\83\\b230791b33112fccbb6f5eef5744556c2ba091",
+    ".git\\objects\\11\\ce305b391ea8845088a251cf6d0f61dd18ee58",
+    ".git\\objects\\4e\\91f059970d5cda0d7098b6f37c3c4ce8ff75e9",
+    ".git\\objects\\81\\bff31f34c6960ca73a7a47b078eca4762383ed",
+    ".git\\objects\\bf\\a9788bd40c330b4634d3c072ba7cf5baac8cf9",
+    ".git\\objects\\cb\\a8033e0f747243a146cd7c843a7680f2fd5a4e",
+    ".git\\objects\\8a\\d3e8a3f5a9195c341ce1592ee9881d6c73a387",
+    ".git\\objects\\3a\\744ff6ad2030d09f2171b2d29d95930793261b",
+    ".git\\objects\\cb\\d73e7d7ec2f28fd9ba25fb05c3d5aeb1d2273a",
+    ".git\\objects\\ec\\bc3052a860c940738c942853ca2f430db4134e",
+    ".git\\objects\\37\\6129ac2037dd4f3b3f4b03d0dfd400d2e7e710"
   ],
   "deletedFilesIos": [],
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
   "changedFiles": [
-    "www\\templates\\scenarios-monomit.html"
+    "www\\css\\style.css"
   ],
   "deletedFiles": [],
   "addedPlugins": [],

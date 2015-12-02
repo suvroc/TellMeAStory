@@ -1,9 +1,14 @@
 /* Empty. Add your own CSS if you like */
+body {
+    font-size: 12vh;
+}
 
 .dice.icon {
-    font-size: 5em;
+    font-size: 12vh;
     text-align: center;
     width: 100%;
+    align-items: center;
+  justify-content: center;
 }
 .card {
     text-align:center;
@@ -30,4 +35,16 @@
 .animateItem.ng-move.ng-move-active,
 .animateItem.ng-enter.ng-enter-active {
   -webkit-transform:scale(1);
+}
+
+.tile .card:before {
+    content:'';
+    float:left;
+    padding-top:100%;
+}
+
+.tile .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
