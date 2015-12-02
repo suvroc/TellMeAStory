@@ -110,7 +110,7 @@
 
     function saveTiles(tiles, type)
     {
-        
+
 
         var dataList = [];
         if (localStorageService.get(LS_SAVED_SETS))
@@ -136,12 +136,20 @@
 
     function getSavedTiles(type)
     {
-        return localStorageService.get(LS_SAVED_SETS)
+        var savedSets = localStorageService.get(LS_SAVED_SETS);
+        if (!savedSets) {
+          return null;
+        }
+        return savedSets
             .filter(function(el) {return el.type == type});
     }
 
     function getSavedTile(id) {
-        var list = localStorageService.get(LS_SAVED_SETS)
+        var savedSets = localStorageService.get(LS_SAVED_SETS);
+        if (!savedSets) {
+          return null;
+        }
+        var list = localStorageService.get(LS_SAVED_SETS);
             .filter(function (el) { return el.id == id });
         if (list)
         {
