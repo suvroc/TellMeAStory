@@ -1506,12 +1506,21 @@
     ".git\\objects\\3a\\744ff6ad2030d09f2171b2d29d95930793261b",
     ".git\\objects\\cb\\d73e7d7ec2f28fd9ba25fb05c3d5aeb1d2273a",
     ".git\\objects\\ec\\bc3052a860c940738c942853ca2f430db4134e",
-    ".git\\objects\\37\\6129ac2037dd4f3b3f4b03d0dfd400d2e7e710"
+    ".git\\objects\\37\\6129ac2037dd4f3b3f4b03d0dfd400d2e7e710",
+    ".git\\objects\\ea\\41c3dce872bc48a1fc931639e4aedf00fa1239",
+    ".git\\objects\\5d\\2401ee36e5aed837a5198c9296aac4996613c2",
+    ".git\\objects\\ba\\41cc6cbc5c93a0a282e67ab0d189b6d1b50a83",
+    ".git\\objects\\2c\\afb8281790f0de5d7294a0fa9bcb52b89057c9",
+    ".git\\objects\\6b\\11a9ed52c994aa64413f2a8bdd52a5da55f214",
+    ".git\\objects\\d0\\8c4f1740fdc67d17c1f60072ebe5beb326eb35",
+    ".git\\objects\\cd\\0d91d44ff1ed76c7c577f55101438f4b53d11c",
+    ".git\\objects\\8f\\fcc5b94b91a70ca4b6ba35880c32963b26d4c5"
   ],
   "deletedFilesIos": [],
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
   "changedFiles": [
+    "www\\templates\\scenarios-monomit.html",
     "www\\css\\style.css"
   ],
   "deletedFiles": [],

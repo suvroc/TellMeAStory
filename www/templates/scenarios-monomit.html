@@ -9,7 +9,7 @@
                 ng-click="saveTiles(stagesObject)">
             Zapisz ustawienie
         </button>
-        <div class="list">
+        <div class="list monomit">
             <ul>
                 <li ng-repeat="stage in stagesObject.stages"
                     style="-webkit-transition-delay:{{$index * 300}}ms"
@@ -19,8 +19,7 @@
                         <input type="checkbox">
                     </label>
                         {{stage.name}}
-                    <i class="fa icon" ng-class="stage.iconClass"
-                       style="font-size:1.75em;float:right;margin-bottom:-10px"></i>
+                    <i class="fa icon" ng-class="stage.iconClass"></i>
                 </li>
             </ul>
 

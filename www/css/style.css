@@ -8,39 +8,44 @@ body {
     text-align: center;
     width: 100%;
     align-items: center;
-  justify-content: center;
+    justify-content: center;
 }
+
+.monomit .icon {
+    font-size: 5vh;
+    float: right;
+}
+
 .card {
-    text-align:center;
+    text-align: center;
 }
 
-    
 
-        .animateItem.ng-move,
+
+.animateItem.ng-move,
 .animateItem.ng-enter,
 .animateItem.ng-leave {
-  
-          -webkit-transition-property: all;
-          -webkit-transition-timing-function: ease-out-cubic;
-          -webkit-transition-duration: 400ms;
+    -webkit-transition-property: all;
+    -webkit-transition-timing-function: ease-out-cubic;
+    -webkit-transition-duration: 400ms;
 }
 
-.animateItem.ng-leave.ng-leave-active,
-.animateItem.ng-move,
-.animateItem.ng-enter {
-  -webkit-transform:scale(0);
-}
+    .animateItem.ng-leave.ng-leave-active,
+    .animateItem.ng-move,
+    .animateItem.ng-enter {
+        -webkit-transform: scale(0);
+    }
 
-.itemanimateItem.ng-leave,
-.animateItem.ng-move.ng-move-active,
-.animateItem.ng-enter.ng-enter-active {
-  -webkit-transform:scale(1);
-}
+        .itemanimateItem.ng-leave,
+        .animateItem.ng-move.ng-move-active,
+        .animateItem.ng-enter.ng-enter-active {
+            -webkit-transform: scale(1);
+        }
 
 .tile .card:before {
-    content:'';
-    float:left;
-    padding-top:100%;
+    content: '';
+    float: left;
+    padding-top: 100%;
 }
 
 .tile .card {
@@ -48,3 +53,14 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.monomit .item {
+    display: flex;
+    align-items: center;
+}
+
+    .monomit .item .icon {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: auto;
+    }
