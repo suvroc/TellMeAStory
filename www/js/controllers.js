@@ -72,7 +72,19 @@
 .controller('RandomCtrl',/* @ngInject */ function ($scope, $stateParams, configService,
     symbolService, $ionicPopup) {
 
-    
+    $scope.items = [];
+
+    $scope.addItems = function () {
+        $scope.items = [
+        { name: "Apple" },
+        { name: "Orange" },
+        { name: "Banana" },
+        { name: "Lemon" },
+        { name: "Lime" },
+        { name: "Melon" },
+        { name: "Tangerine" }
+        ];
+    }
 
     $scope.randomTiles = randomTiles;
     $scope.saveTiles = saveTiles;

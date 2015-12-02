@@ -8,3 +8,50 @@
 .card {
     text-align:center;
 }
+
+    ul {
+        list-style-type: none;
+        position: relative;
+    }
+
+    li {
+        background-color: #e3e3e3;
+        color: #666;
+        font-family: Arial;
+        padding: 1em;
+        margin: 0 5px 5px 5px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .insert-enter {
+        -webkit-transform: scale(0);
+        -webkit-transition-property: all;
+        -webkit-transition-timing-function: ease-out-cubic;
+        -webkit-transition-duration: 400ms;
+    }
+
+        .insert-enter.insert-enter-active {
+            -webkit-transform: scale(1);
+        }
+
+        .animateItem.ng-move,
+.animateItem.ng-enter,
+.animateItem.ng-leave {
+  
+          -webkit-transition-property: all;
+          -webkit-transition-timing-function: ease-out-cubic;
+          -webkit-transition-duration: 400ms;
+}
+
+.animateItem.ng-leave.ng-leave-active,
+.animateItem.ng-move,
+.animateItem.ng-enter {
+  -webkit-transform:scale(0);
+}
+
+.itemanimateItem.ng-leave,
+.animateItem.ng-move.ng-move-active,
+.animateItem.ng-enter.ng-enter-active {
+  -webkit-transform:scale(1);
+}

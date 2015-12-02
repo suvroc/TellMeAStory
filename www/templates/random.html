@@ -1,4 +1,10 @@
-﻿<ion-view view-title="Opowiedz historię">
+﻿<style>
+
+</style>
+
+
+
+<ion-view view-title="Opowiedz historię">
     <ion-content scroll="true" scrollbar-y="true">
 
         <button class="button button-block button-positive" ng-click="randomTiles()">
@@ -9,22 +15,27 @@
                 {{tiles.name}}
             </li>
         </ul>
-        <div class="row" ng-repeat="tile in tiles.stages">
-            <div class="row">
-                <div class="col col-33" ng-repeat="item in tile">
+        <div class="row animateItem" ng-repeat="tile in tiles.stages"
+             style="-webkit-transition-delay:{{$index * 500 * 3}}ms">
+                <div class="col col-33 animateItem" ng-repeat="item in tile"
+                     ng-animate="{enter:'insert-enter'}"
+                     style="-webkit-transition-delay:{{$index * 500}}ms">
                     <div class="card">
                         <i class="dice icon" ng-class="item.iconClass"></i>
                     </div>
-                </div>
             </div>
 
         </div>
 
     </ion-content>
     <div class="bar bar-footer">
-        <button class="button button-stable button-block" 
+        <button class="button button-stable button-block"
                 ng-click="saveTiles(tiles)">
             Zapisz ustawienie
         </button>
     </div>
+
+
 </ion-view>
+
+

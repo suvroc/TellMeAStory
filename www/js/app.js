@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter',
-    ['ionic', 'starter.controllers', 'random.services', 'LocalStorageModule'])
+    ['ionic', 'starter.controllers', 'random.services', 'LocalStorageModule','ngAnimate'])
 
 .run(/* @ngInject */ function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
