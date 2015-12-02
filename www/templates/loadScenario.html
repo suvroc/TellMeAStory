@@ -6,7 +6,8 @@
             </div>
             <ion-item ng-repeat="scenario in scenarios"
                        menu-close
-                       ng-click="loadList(scenarioName, scenario.id)">
+                       ng-click="loadList(scenarioName, scenario.id)"
+                      on-hold="deleteSaved(scenarioName, scenario.id)">
                 <i class="icon" ng-class="scenario.thumbnail"
                    style="padding-right:10px"></i>
                 {{scenario.name}}

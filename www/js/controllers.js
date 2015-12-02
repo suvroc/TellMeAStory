@@ -219,7 +219,7 @@
             },
             {
                 name: 'Nowe życie',
-                hint: 'Zmiany w życiu po przezyciu przygody',
+                hint: 'Zmiany w życiu po przeżyciu przygody',
                 iconClass: 'fa-key',
                 done: false
             },
@@ -253,10 +253,10 @@
     $scope.generate = generate;
     $scope.saveTiles = saveTiles;
 
-    function showHint(hint)
+    function showHint(name, hint)
     {
         var alertPopup = $ionicPopup.alert({
-            title: 'Podpowiedź!',
+            title: name,
             template: hint
         });
         alertPopup.then(function (res) {
@@ -301,11 +301,27 @@
     };
 })
 .controller('LoadScenarioCtrl',/* @ngInject */ function ($scope, $stateParams,
-    symbolService, $state) {
+    symbolService, $state, $ionicPopup) {
     $scope.scenarios = symbolService.getSavedTiles($stateParams.scenarioName);
     $scope.scenarioName = $stateParams.scenarioName;
 
     $scope.loadList = function (scenarioName, id) {
         $state.go('app.'+ scenarioName +'Param', { setId: id }, { reload: true });
     };
+
+    $scope.deleteSaved = function (scenarioName, id) {
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Kasowanie',
+            template: 'Czy chcesz skasować zaznaczony zapis?',
+            cancelText: 'Nie',
+            okText: 'Tak'
+        });
+        confirmPopup.then(function (res) {
+            if (res) {
+                symbolService.deleteSavedTile(scenarioName, id);
+                $scope.scenarios = symbolService.getSavedTiles($stateParams.scenarioName);
+                //$state.go($state.current, {}, { reload: true });
+            }
+        });
+    }
 });

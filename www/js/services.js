@@ -159,6 +159,24 @@
         }
     }
 
+    function deleteSavedTile(scenarioName, id) {
+        var savedSets = localStorageService.get(LS_SAVED_SETS);
+        if (!savedSets) {
+            return null;
+        }
+        var list = savedSets
+            .filter(function (el) { return el.id == id });
+        var item;
+        if (list) {
+            item =  list[0];
+        }
+        if (item) {
+            var index = savedSets.indexOf(item);
+            savedSets.splice(index, 1);
+            localStorageService.set(LS_SAVED_SETS, savedSets);
+        }
+    }
+
     function guid() {
         function _p8(s) {
             var p = (Math.random().toString(16) + "000000000").substr(2, 8);
@@ -171,6 +189,7 @@
         getRandomArray: getRandomArray,
         saveTiles: saveTiles,
         getSavedTiles: getSavedTiles,
-        getSavedTile: getSavedTile
+        getSavedTile: getSavedTile,
+        deleteSavedTile: deleteSavedTile
     };
 })

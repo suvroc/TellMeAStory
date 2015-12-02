@@ -1,10 +1,7 @@
 /* Empty. Add your own CSS if you like */
-body {
-    font-size: 12vh;
-}
 
 .dice.icon {
-    font-size: 12vh;
+    font-size: 18vw;
     text-align: center;
     width: 100%;
     align-items: center;
@@ -12,12 +9,13 @@ body {
 }
 
 .monomit .icon {
-    font-size: 5vh;
+    font-size: 8vw;
     float: right;
 }
 
 .card {
     text-align: center;
+    margin: 0;
 }
 
 

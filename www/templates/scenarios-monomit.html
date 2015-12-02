@@ -14,7 +14,7 @@
                 <li ng-repeat="stage in stagesObject.stages"
                     style="-webkit-transition-delay:{{$index * 300}}ms"
                     class="item item-checkbox animateItem"
-                    on-hold="showHint('{{stage.hint}}')">
+                    on-hold="showHint(stage.name, stage.hint)">
                     <label class="checkbox">
                         <input type="checkbox">
                     </label>
