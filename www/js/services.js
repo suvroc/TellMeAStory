@@ -149,7 +149,7 @@
         if (!savedSets) {
           return null;
         }
-        var list = localStorageService.get(LS_SAVED_SETS);
+        var list = savedSets
             .filter(function (el) { return el.id == id });
         if (list)
         {

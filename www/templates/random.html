@@ -16,10 +16,8 @@
             </li>
         </ul>
         <div class="row animateItem" ng-repeat="tile in tiles.stages"
-             style="-webkit-transition-delay:{{$index * 500 * 3}}ms">
-                <div class="col col-33 animateItem" ng-repeat="item in tile"
-                     ng-animate="{enter:'insert-enter'}"
-                     style="-webkit-transition-delay:{{$index * 500}}ms">
+             style="-webkit-transition-delay:{{$index * 500 * 2}}ms">
+                <div class="col col-33" ng-repeat="item in tile">
                     <div class="card">
                         <i class="dice icon" ng-class="item.iconClass"></i>
                     </div>

@@ -141,7 +141,8 @@
 
         myPopup.then(function (res) {
             tiles.name = res;
-        symbolService.saveTiles(tiles, 'random');
+            tiles.thumbnail = tiles.stages[0][0].iconClass;
+            symbolService.saveTiles(tiles, 'random');
         });
 
         //symbolService.saveTiles(tiles, 'random');
@@ -289,6 +290,7 @@
 
         myPopup.then(function (res) {
             tiles.name = res;
+            tiles.thumbnail = tiles.stages[0].iconClass;
             symbolService.saveTiles(tiles, 'monomit');
         });
     }

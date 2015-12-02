@@ -12,12 +12,13 @@
         <div class="list">
             <ul>
                 <li ng-repeat="stage in stagesObject.stages"
-                    class="item item-checkbox"
+                    style="-webkit-transition-delay:{{$index * 300}}ms"
+                    class="item item-checkbox animateItem"
                     on-hold="showHint('{{stage.hint}}')">
                     <label class="checkbox">
-                        <input type="checkbox" ng-model="stage.done">
+                        <input type="checkbox">
                     </label>
-                    {{stage.name}}
+                        {{stage.name}}
                     <i class="fa icon" ng-class="stage.iconClass"
                        style="font-size:1.75em;float:right;margin-bottom:-10px"></i>
                 </li>
