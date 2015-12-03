@@ -88,6 +88,12 @@
 
     $scope.randomTiles = randomTiles;
     $scope.saveTiles = saveTiles;
+
+    $scope.switchDone = switchDone;
+
+    function switchDone(tile) {
+        tile.done = !tile.done;
+    }
     
     $scope.tiles = [];
 
@@ -99,17 +105,24 @@
     }
 
     function randomTiles() {
-        var tiles = [];
+        var tilesRows = [];
         var randomIcons = symbolService.getRandomArray(configService.tiles.value);
-        
+
+
+
+        randomIcons.stages = randomIcons.stages.map(function (el) {
+            el.done = false;
+            return el;
+        });
+
         var i, j, temparray, chunk = 3;
         for (i = 0, j = randomIcons.stages.length; i < j; i += chunk) {
             temparray = randomIcons.stages.slice(i, i + chunk);
-            tiles.push(temparray);
+            tilesRows.push(temparray);
         }
 
         $scope.tiles = {
-            stages: tiles,
+            stages: tilesRows,
             id: randomIcons.id
         };
     }
@@ -247,7 +260,18 @@
             data.stages[i].iconClass = randomIcons.stages[i].iconClass;
         }
         data.id = randomIcons.id;
-        $scope.stagesObject = data;
+        
+        var newStages = [];
+        for (var i = 0; i < data.stages.length; i++) {
+            newStages.push({
+                name: data.stages[i].name,
+                hint: data.stages[i].hint,
+                iconClass: data.stages[i].iconClass,
+                done: data.stages[i].done
+            });
+        }
+
+        $scope.stagesObject.stages = newStages;
     }
 
     $scope.generate = generate;

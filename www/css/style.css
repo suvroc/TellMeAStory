@@ -18,6 +18,10 @@
     margin: 0;
 }
 
+.biggerShadow {
+        box-shadow: 0 0 2px 2px #0C60EE;
+}
+
 
 
 .animateItem.ng-move,
