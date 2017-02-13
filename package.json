@@ -3,7 +3,7 @@
   "version": "1.1.1",
   "description": "TellMeAStory: An Ionic project",
   "devDependencies": {
-    "browser-sync": "2.11.1",
+    "browser-sync": "2.18.8",
     "gulp-autoprefixer": "3.1.1",
     "gulp-cache": "0.2.8",
     "gulp-concat": "2.5.2",
